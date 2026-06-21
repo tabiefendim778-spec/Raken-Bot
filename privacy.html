@@ -1,162 +1,313 @@
-# <p align="center" style="font-size: 55px; color: #5865F2; font-weight: bold; letter-spacing: 2px;">🛡️ RAKEN BOT</p>
-## <p align="center" style="font-size: 26px; color: #23a55a; font-weight: 500;">Uluslararası Standartlarda Global Gizlilik Politikası, Veri Güvenliği ve Kullanım Şartları Mevzuatı</p>
-
----
-
-> [!IMPORTANT]
-> **Doküman Kodu:** RB-PP-2026-V4  
-> **Son Güncelleme Tarihi:** 21 Haziran 2026  
-> **Yürürlük ve Bağlayıcılık Tarihi:** 21 Haziran 2026  
-> **Kapsam:** Raken Bot Altyapısı, API Entegrasyonları, Veri Tabanı Sistemleri ve Tüm Dijital Hizmetler.
-
----
-
-## <p style="font-size: 24px; color: #5865F2; font-weight: bold; border-bottom: 2px solid #5865F2; padding-bottom: 5px;">1. 📌 Giriş, Hukuki Dayanak ve Tanımlar</p>
-
-İşbu Gizlilik Politikası ve Veri Güvenliği Protokolü, **Raken Bot** (bundan böyle metinde kısaca **"Bot"**, **"Hizmet"** veya **"Yazılım"** olarak anılacaktır) ve onun yasal geliştiricileri, mülkiyet sahipleri ile yönetim kadrosu (bundan böyle kısaca **"Yönetim"** veya **"Geliştirici Ekip"** olarak anılacaktır) tarafından yürütülmektedir.
-
-### 1.1 Tanımlar ve Kısaltmalar
-*   **Discord API:** Discord Inc. tarafından geliştiricilere sunulan resmi uygulama programlama arayüzünü,
-*   **Son Kullanıcı (Kullanıcı):** Botun eklendiği sunucularda bulunan, botun komutlarıyla doğrudan veya dolaylı etkileşime giren gerçek kişiyi,
-*   **Sunucu Sahibi / Yöneticisi:** Botu kendi Discord sunucusuna davet eden, bota yetki tanımlayan ve sunucu yönetiminden sorumlu gerçek veya tüzel kişiyi,
-*   **Veri İşleme:** Verilerin tamamen veya kısmen otomatik olan yollarla elde edilmesi, kaydedilmesi, depolanması, muhafaza edilmesi ve değiştirilmesi süreçlerini ifade eder.
-
-### 1.2 Yasal Onay Beyanı
-Bu Hizmeti kullanan, sunucusuna ekleyen veya bota erişim izni veren her birey, işbu sözleşmeyi hiçbir baskı altında kalmadan, özgür iradesiyle okuduğunu, maddelerin teknik gereksinimlerini anladığını ve bu politikada belirtilen veri işleme faaliyetlerine **kesin, açık ve gayrikabil-i rücu (geri alınamaz)** bir şekilde muvafakat ettiğini beyan, kabul ve taahhüt eder.
-
----
-
-## <p style="font-size: 24px; color: #f04747; font-weight: bold; border-bottom: 2px solid #f04747; padding-bottom: 5px;">2. 🔍 Politikanın Kapsamı ve Modüler Detaylar</p>
-
-Raken Bot, çok fonksiyonlu bir Discord otomasyon aracıdır. Bu politikanın hükümleri, aşağıda listelenen alt modüllerin tamamında ve bu modüllerin alt kırılımlarında işlenen tüm veriler için istisnasız olarak geçerlidir:
-
-*   **A. Gelişmiş Moderasyon ve Ceza Sistemi:** `/ban`, `/kick`, `/timeout`, `/warn`, `/unban` komutları; toplu üye denetimleri, sunucu içi susturma listeleri ve geçmiş ceza sicili kayıtları.
-*   **B. Gelişmiş Loglama ve Denetim Kaydı:** Sunucu içerisinde silinen mesajlar, düzenlenen mesajlar, sunucuya giren/çıkan kullanıcılar, rol alan/veren yetkililer, kanal oluşturma/silme aktiviteleri ve ses kanalı hareketleri.
-*   **C. Gelişmiş Destek Sistemi (Ticket):** Canlı destek odası talepleri, destek odası açılış-kapanış zaman damgaları, destek talebi oluşturan kullanıcı bilgileri ve yetkililerle yapılan yazışmaların transkript (metin) dökümleri.
-*   **D. Global ve Sunucu İçi Ekonomi / Eğlence:** Sanal para bakiyeleri, envanter sistemleri, günlük/haftalık ödül durumları, kumar/bahis simülasyon kayıtları ve sunucular arası küresel sıralama (leaderboard) verileri.
-*   **E. Seviye ve Aktivite Sistemi:** Kullanıcıların attığı mesaj sayısına göre hesaplanan tecrübe puanları (XP), kazanılan seviyeler, ses kanallarında kalma süreleri ve seviye ödülü olarak tanımlanan otomatik roller.
-*   **F. Otomasyon ve Giriş Güvenliği (Anti-Raid / Captcha):** Sunucuya giriş yapan hesapların profil yaşı analizi, Captcha (doğrulama kodu) doğruluk durumları, şüpheli hesap tespit algoritmaları ve otomatik rol (autorole) dağıtım motoru.
-*   **G. Premium ve Abonelik Altyapısı:** Bota maddi destek sağlayan sunucuların/kullanıcıların öncelikli işlem (hızlı kuyruk) hakları, premium lisans anahtarları, bitiş tarihleri ve bota özel tanımlanmış özel isim/profil yapılandırmaları.
-
----
-
-## <p style="font-size: 24px; color: #f5a623; font-weight: bold; border-bottom: 2px solid #f5a623; padding-bottom: 5px;">3. 📊 Toplanan ve İşlenen Verilerin Detaylı Kataloğu</p>
-
-Bot, Discord Inc. altyapısının sağladığı yasal sınırlar ve Discord Developer Terms of Service (Geliştirici Hizmet Şartları) çerçevesinde, yalnızca işlevselliğini sürdürebilmesi için zorunlu olan verileri toplar. Toplanan veriler katı bir şekilde sınıflandırılmıştır:
-
-### 3.1 Teknik ve Benzersiz Tanımlayıcılar (Identifiers)
-*   **Discord Kullanıcı ID (User ID):** Sistemdeki her kullanıcının benzersiz 17-19 haneli sayısal numarası. (Kullanıcının gerçek kimliğiyle eşleştirilmez).
-*   **Discord Sunucu ID (Guild ID):** Botun ekli olduğu her sunucunun benzersiz sayısal kimliği.
-*   **Kanal ve Rol ID'leri:** Ayarların doğru çalışması için hedef gösterilen metin/ses kanallarının ve sunucu rollerinin sayısal numaraları.
-*   **Mesaj ID'leri:** Loglama, mesaj tepki rolleri (reaction role) ve mesaj silme/düzenleme kontrolleri için gerekli olan mesaj kimlik numaraları.
-
-### 3.2 Kullanıcı Davranış ve İstatistik Verileri
-*   **Komut Kullanım Geçmişi:** Hangi kullanıcının, hangi sunucuda, saat kaçta, hangi komutu çalıştırdığına dair analitik zaman damgaları.
-*   **Aktivite Metrikleri:** Atılan toplam mesaj sayısı, ses kanallarında geçirilen toplam dakika gibi istatistiksel veriler.
-*   **Destek Odası İçerikleri:** Açılan Ticket'ların metinsel içerikleri, ekleri (görseller/dosyalar) ve talep geçmişi.
-
-### 3.3 Sunucu Yönetim ve Yapılandırma Verileri
-*   Botun sunucu içinde nasıl davranacağını belirleyen filtre ayarları (örn: küfür engelleyici açık/kapalı durumu, link engelleme beyaz listesi).
-*   Giriş-çıkış mesaj şablonları, sunucuya özel ayarlanmış bota ait özel ön ekler (prefix) veya slash komut izin matrisleri.
-
----
-
-## <p style="font-size: 24px; color: #23a55a; font-weight: bold; border-bottom: 2px solid #23a55a; padding-bottom: 5px;">4. 🚫 Kesinlikle Toplanmayan ve Gizli Tutulan Veriler</p>
-
-> [!WARNING]
-> Raken Bot altyapısı, siber güvenlikte "Sıfır Güven" (Zero Trust) ve "Minimum Veri" (Data Minimization) ilkelerini benimser. Aşağıdaki veri kategorileri hiçbir şart ve koşulda bota ait sunuculara iletilemez, işlenemez ve saklanamaz:
-
-*   **Hassas Kişisel Veriler:** Kullanıcıların gerçek hayattaki isimleri, soyisimleri, biyometrik verileri, din, dil, ırk, mezhep veya siyasi görüş bilgileri.
-*   **Hesap Giriş Kimlikleri:** Kullanıcıların Discord şifreleri, e-posta adresleri, iki aşamalı doğrulama (2FA) yedek kodları ve en önemlisi **Discord Hesap Tokenları**.
-*   **Finansal ve Ödeme Bilgileri:** Premium abonelik işlemlerinde kullanılan kredi kartı numaraları, son kullanma tarihleri, CVV/CVC kodları, banka hesap numaraları (IBAN). *Not: Tüm ödemeler resmi üçüncü taraf ödeme geçitleri (örn. Stripe, Papara, Shopier vb.) üzerinden, onların kendi güvenli altyapılarında gerçekleşir; bota finansal veri akışı olmaz.*
-*   **Özel Hayat ve DM Mesajları:** Botun ekli olmadığı veya komut tetiklenmeyen gizli/özel mesajlaşma (DM) içerikleri ile botun loglama/moderasyon kapsamı dışında kalan genel sohbetlerin anlamsız metin gövdeleri.
-*   **Cihaz ve Ağ Bilgileri:** Kullanıcıların IP adresleri, MAC adresleri, coğrafi konum koordinatları, kullandıkları internet servis sağlayıcıları (ISS) veya cihaz donanım bilgileri.
-
----
-
-## <p style="font-size: 24px; color: #5865F2; font-weight: bold; border-bottom: 2px solid #5865F2; padding-bottom: 5px;">5. ⚙️ Verilerin İşlenme Amaçları ve Hukuki Gerekçeler</p>
-
-Toplanan veriler, rastgele veya keyfi amaçlarla değil, tamamen aşağıda belirtilen meşru menfaatler ve teknik zorunluluklar doğrultusunda işlenmektedir:
-
-1.  **Hizmetin İfa Edilmesi ve Süreklilik:** Botun sunucularda stabil çalışması, sunucu sahiplerinin yaptığı özelleştirilmiş ayarların (örn: hoş geldin mesajı içeriği) veri tabanında kaybolmadan saklanması.
-2.  **Siber Güvenlik ve Tehdit Engelleme:** Kötü niyetli kullanıcıların bot altyapısına yönelik DDoS, SQL Enjeksiyonu, Spam veya API suistimali gibi siber saldırı girişimlerinin tespit edilmesi ve bu hesapların küresel kara listeye (global blacklist) alınması.
-3.  **Performans Optimizasyonu ve Hata Ayıklama:** Bot kodunda meydana gelen mantıksal çökmelerin, yavaşlamaların veya istisnai hataların (exceptions) hangi komut ve veri girdisi esnasında oluştuğunun tespiti ve yazılımın iyileştirilmesi.
-4.  **Adil Rekabet ve Oyun Dengesi:** Ekonomi ve seviye modüllerinde hile (dupe/exploit) yapılmasını engellemek, adil bir sunucu içi sıralama sistemi sunmak.
-
----
-
-## <p style="font-size: 24px; color: #f5a623; font-weight: bold; border-bottom: 2px solid #f5a623; padding-bottom: 5px;">6. 🤝 Veri Paylaşımı, Üçüncü Taraflar ve Uluslararası Veri Aktarımı</p>
-
-*   **Ticari Satış Yasağı:** Raken Bot Yönetimi, topladığı kullanıcı verilerini hiçbir surette reklam ajanslarına, veri simsarlarına, pazarlama şirketlerine veya herhangi bir üçüncü şahsa **satmayacağını, kiralamayacağını ve takas etmeyeceğini** en kesin taahhütle garanti eder.
-*   **Resmi Makamlar ve Hukuki Zorunluluklar:** Veriler, yalnızca yürürlükte olan ulusal veya uluslararası yasal mevzuatlar (Siber Suçlarla Mücadele, Savcılık Talimatları, Mahkeme Kararları) çerçevesinde, resmi ve usulüne uygun bir celp kararı ibraz edilmesi durumunda yasal mercilere aktarılır.
-*   **Altyapı Sağlayıcıları (Hosting):** Verileriniz, dünya standartlarında siber korumaya sahip güvenli sanal sunucu (VDS/Dedicated) ve bulut veri tabanı (Cloud Database) altyapılarında barındırılır. Bu altyapı sağlayıcılarının verilere doğrudan erişim yetkisi bulunmamaktadır; veriler şifrelenmiş (encrypted) olarak saklanır.
-
----
-
-## <p style="font-size: 24px; color: #23a55a; font-weight: bold; border-bottom: 2px solid #23a55a; padding-bottom: 5px;">7. 🔒 İleri Düzey Veri Güvenliği ve Siber Savunma Protokolleri</p>
-
-Verilerinizin güvenliğini sağlamak adına Bot altyapısında aşağıdaki teknik tedbirler aktif olarak uygulanmaktadır:
-
-*   **Erişim Yetki Matrisi:** Veri tabanlarına ve botun yönetim paneline erişim, yalnızca en üst düzey iki (2) ana geliştirici ile sınırlandırılmıştır. Diğer alt kademe personelin veya destek ekibinin ham verilere erişimi tamamen engellenmiştir.
-*   **Çift Faktörlü Koruma:** Yönetici panelleri ve sunucu erişimleri, donanımsal veya yazılımsal İki Aşamalı Kimlik Doğrulama (2FA) ile korunmaktadır.
-*   **Şifreleme Standartları:** Hassas veri tabanı girdileri ve yapılandırma dosyaları, modern şifreleme algoritmaları kullanılarak saklanır. Veriler durağan haldeyken (at rest) ve aktarım halindeyken (in transit) şifrelidir.
-*   **Yedekleme ve Felaket Kurtarma:** Olası bir veri merkezinin çökmesi veya fiziksel hasar görmesi durumuna karşı, veri tabanları her 24 saatte bir şifreli bulut depolarına yedeklenir.
-
----
-
-## <p style="font-size: 24px; color: #f04747; font-weight: bold; border-bottom: 2px solid #f04747; padding-bottom: 5px;">8. ⏳ Veri Saklama Süreleri ve Kalıcı İmha (Silme) Prosedürü</p>
-
-*   **Aktif Kullanım Süresi:** Verileriniz, botun işlevlerini yerine getirebilmesi için gerekli olan makul süre boyunca veri tabanlarında tutulur.
-*   **Sunucudan Ayrılma Durumu:** Bot bir sunucudan çıkarıldığında (kick/ban), o sunucuya ait tüm özel ayarlar, filtre yapılandırmaları ve log geçmişleri otomatik olarak "pasif" konuma alınır ve en geç 30 iş günü içerisindeki genel veri tabanı optimizasyon döngüsünde sistemden **geri getirilemeyecek şekilde tamamen kazınır ve silinir**.
-*   **Kullanıcı Unutulma Talebi:** Bir kullanıcı botun veri tabanından tamamen silinmek istediğinde, destek sunucusu üzerinden yapacağı başvuru ile ekonomi bakiyeleri, seviye puanları ve kullanıcı ID'sine bağlı tüm veriler 72 saat içinde kalıcı olarak imha edilir.
-
----
-
-## <p style="font-size: 24px; color: #5865F2; font-weight: bold; border-bottom: 2px solid #5865F2; padding-bottom: 5px;">9. ⚖️ Küresel Veri Koruma Mevzuatlarına Uyum Beyanı</p>
-
-Raken Bot, dünya genelindeki farklı hukuk sistemlerinin siber gizlilik standartlarını temel ilke olarak kabul eder:
-
-### 9.1 GDPR (Avrupa Birliği Genel Veri Koruma Yönetmeliği)
-Avrupa Birliği üye ülkelerinde ikamet eden kullanıcılar, GDPR kapsamında bota karşı şu haklara sahiptir: Verilerine erişim hakkı, verilerinin düzeltilmesini isteme hakkı, verilerinin silinmesini (Unutulma Hakkı) talep etme hakkı ve veri işlenmesini kısıtlama hakkı.
-
-### 9.2 KVKK (6698 Sayılı Kişisel Verilerin Korunması Kanunu)
-Türkiye Cumhuriyeti sınırları içerisindeki kullanıcılar için, 6698 sayılı kanunun 11. maddesinde belirtilen; kendisiyle ilgili kişisel veri işlenip işlenmediğini öğrenme, işlenme amacını bilme ve verilerin yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme hakları saklıdır ve bota uygulandığı ölçüde tam uyum gözetilir.
-
-### 9.3 CCPA (California Tüketici Gizliliği Yasası)
-Amerika Birleşik Devletleri / California eyaletindeki kullanıcılar için veri toplama süreçlerinde şeffaflık ilkesi bu metinle eksiksiz sağlanmıştır.
-
----
-
-## <p style="font-size: 24px; color: #f5a623; font-weight: bold; border-bottom: 2px solid #f5a623; padding-bottom: 5px;">10. 👶 Çocukların Çevrimiçi Gizliliğinin Korunması</p>
-
-Raken Bot, COPPA (Çocukların Çevrimiçi Gizliliğini Koruma Yasası) ve Discord küresel yaş sınırlandırma politikalarına sıkı sıkıya bağlıdır. Hizmetlerimiz, **13 yaşın altındaki** (veya yerel yasaların öngördüğü daha yüksek bir asgari yaş sınırının altındaki) çocukların tek başlarına kullanımına uygun değildir. 13 yaşından küçük bir çocuğun bota veri sağladığı fark edildiği an, yasal vasisinin talebi aranmaksızın ilgili tüm veriler sistemden derhal silinir ve hesap bot kullanımından uzaklaştırılır.
-
----
-
-## <p style="font-size: 24px; color: #f04747; font-weight: bold; border-bottom: 2px solid #f04747; padding-bottom: 5px;">11. 📝 Politika Değişiklikleri, Bildirim ve Takip Yükümlülüğü</p>
-
-Geliştirici Ekip, siber mevzuatlardaki güncellemeler, Discord API politikalarındaki köklü değişimler veya bota eklenecek devrimsel yeni modüller doğrultusunda, işbu Gizlilik Politikası metninde önceden herhangi bir ihtara gerek kalmaksızın **kısmen veya tamamen değişiklik yapma hakkını saklı tutar**. 
-
-Değişiklikler bu GitHub sayfasında veya botun resmi web sitesinde/destek sunucusunda yayınlandığı andan itibaren hukuken geçerlilik kazanır. Kullanıcıların ve sunucu yöneticilerinin belirli aralıklarla bu metni kontrol etmesi kendi sorumluluklarındadır. Politikadaki güncellemelerden sonra botu kullanmaya devam etmeniz, yeni maddeleri kayıtsız şartsız onayladığınız anlamına gelir.
-
----
-
-## <p style="font-size: 24px; color: #23a55a; font-weight: bold; border-bottom: 2px solid #23a55a; padding-bottom: 5px;">12. ⚠️ Garanti Reddi Beyanı ve Hukuki Sorumluluk Sınırı (Disclaimer)</p>
-
-Raken Bot, yazılımsal olarak ticari bir işletme garantisi olmaksızın, **"olduğu gibi" (As Is)** ve **"mümkün ve kullanılabilir olduğu sürece" (As Available)** esasıyla sunulan açık/yarı-açık kaynaklı bir projedir. 
-
-Geliştirici Ekip; Discord Inc. kaynaklı küresel altyapı çökmelerinden, veri merkezlerinde (datacenter) oluşabilecek yangın, deprem, siber savaş gibi mücbir sebeplerden, botun donanımsal kesintilerinden, geçici veri tabanı senkronizasyon kayıplarından veya sunucu yöneticilerinin bota yanlış yetki vermesi (örn: Yönetici yetkisi verilmesi sonucu sunucunun zarar görmesi) neticesinde doğabilecek maddi, manevi, doğrudan veya dolaylı hiçbir zarardan, kar kaybından ya da itibar kaybından hukuki, cezai ve mali olarak **sorumlu tutulamaz**. Tüm risk son kullanıcıya ve sunucu sahibine aittir.
-
----
-
-## <p style="font-size: 30px; color: #5865F2; font-weight: bold; text-align: center;">13. 📬 Uluslararası İletişim, Hak Talepleri ve Destek Ofisi</p>
-
-İşbu Gizlilik Politikası dokümanına dair her türlü yasal itirazınız, veri inceleme talepleriniz, KVKK/GDPR kapsamındaki silme (unutulma) başvurularınız veya telif hakkı ihlali bildirimleriniz için resmi kanallarımız aşağıda belirtilmiştir:
-
-> [!NOTE]
-> *   **Resmi Discord Destek Merkezi:** [Raken Bot Destek Sunucusu Davet Linki veya Geliştirici Discord ID'leri]
-> *   **Çalışma Saatleri:** Hafta içi 09:00 - 18:00 (GMT+3)
-> *   **Yanıt Süresi:** Yapılan resmi başvurular, teknik ve hukuki incelemelerin ardından en geç yedi (7) iş günü içerisinde nihai karara bağlanarak tarafınıza geri bildirim yapılacaktır.
-
----
-<p align="center" style="font-size: 13px; color: #72767d; font-style: italic;">© 2026 Raken Bot Yazılım Geliştirme Grubu. Tüm hakları saklıdır. Bu projenin Discord Inc., Discord LLC veya bağlı iştirakleri ile hiçbir resmi, organik veya ticari bağı bulunmamaktadır. Discord markası ve logosu Discord Inc. tescilli ticari markalarıdır.</p>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raken Bot - Gizlilik Politikası ve Kullanım Şartları</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --container-bg: rgba(17, 24, 39, 0.7);
+            --primary: #5865F2; /* Discord Blurple */
+            --primary-hover: #4752C4;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border-color: rgba(88, 101, 242, 0.2);
+            --danger: #f04747;
+            --warning: #f5a623;
+            --success: #23a55a;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(88, 101, 242, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(88, 101, 242, 0.08), transparent 25%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 50px;
+            background: var(--container-bg);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+        .header h1 {
+            font-size: 55px;
+            color: var(--primary);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(88, 101, 242, 0.4);
+        }
+        .header h2 {
+            font-size: 22px;
+            color: var(--success);
+            font-weight: 500;
+        }
+        h2.section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
+            transition: all 0.3s ease;
+        }
+        h2.section-title:hover {
+            padding-left: 10px;
+        }
+        .title-blue { color: var(--primary); border-color: var(--primary); }
+        .title-red { color: var(--danger); border-color: var(--danger); }
+        .title-yellow { color: var(--warning); border-color: var(--warning); }
+        .title-green { color: var(--success); border-color: var(--success); }
+        h3 {
+            font-size: 20px;
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        h3::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            transition: transform 0.2s ease;
+        }
+        ul li:hover {
+            transform: translateX(5px);
+        }
+        ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        code {
+            background-color: rgba(255,255,255,0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #ffffff;
+            font-family: monospace;
+        }
+        .alert {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 5px solid;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .alert p:last-child {
+            margin-bottom: 0;
+        }
+        .alert-info { border-color: var(--primary); }
+        .alert-warning { border-color: var(--warning); }
+        .alert-important { border-color: var(--success); }
+        .alert-danger { border-color: var(--danger); }
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 13px;
+            font-style: italic;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        ::selection {
+            background: var(--primary);
+            color: white;
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3748;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 15px;
+                padding: 30px 20px;
+            }
+            .header h1 { font-size: 40px; }
+            .header h2 { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ RAKEN BOT</h1>
+            <h2>Uluslararası Standartlarda Global Gizlilik Politikası, Veri Güvenliği ve Kullanım Şartları Mevzuatı</h2>
+        </div>
+        <div class="alert alert-info">
+            <p><strong>Doküman Kodu:</strong> RB-PP-2026-V4</p>
+            <p><strong>Son Güncelleme Tarihi:</strong> 21 Haziran 2026</p>
+            <p><strong>Yürürlük ve Bağlayıcılık Tarihi:</strong> 21 Haziran 2026</p>
+            <p><strong>Kapsam:</strong> Raken Bot Altyapısı, API Entegrasyonları, Veri Tabanı Sistemleri ve Tüm Dijital Hizmetler.</p>
+        </div>
+        <h2 class="section-title title-blue">1. 📌 Giriş, Hukuki Dayanak ve Tanımlar</h2>
+        <p>İşbu Gizlilik Politikası ve Veri Güvenliği Protokolü, <strong>Raken Bot</strong> (bundan böyle metinde kısaca <strong>"Bot"</strong>, <strong>"Hizmet"</strong> veya <strong>"Yazılım"</strong> olarak anılacaktır) ve onun yasal geliştiricileri, mülkiyet sahipleri ile yönetim kadrosu (bundan böyle kısaca <strong>"Yönetim"</strong> veya <strong>"Geliştirici Ekip"</strong> olarak anılacaktır) tarafından yürütülmektedir.</p>
+        <h3>1.1 Tanımlar ve Kısaltmalar</h3>
+        <ul>
+            <li><strong>Discord API:</strong> Discord Inc. tarafından geliştiricilere sunulan resmi uygulama programlama arayüzünü,</li>
+            <li><strong>Son Kullanıcı (Kullanıcı):</strong> Botun eklendiği sunucularda bulunan, botun komutlarıyla doğrudan veya dolaylı etkileşime giren gerçek kişiyi,</li>
+            <li><strong>Sunucu Sahibi / Yöneticisi:</strong> Botu kendi Discord sunucusuna davet eden, bota yetki tanımlayan ve sunucu yönetiminden sorumlu gerçek veya tüzel kişiyi,</li>
+            <li><strong>Veri İşleme:</strong> Verilerin tamamen veya kısmen otomatik olan yollarla elde edilmesi, kaydedilmesi, depolanması, muhafaza edilmesi ve değiştirilmesi süreçlerini ifade eder.</li>
+        </ul>
+        <h3>1.2 Yasal Onay Beyanı</h3>
+        <p>Bu Hizmeti kullanan, sunucusuna ekleyen veya bota erişim izni veren her birey, işbu sözleşmeyi hiçbir baskı altında kalmadan, özgür iradesiyle okuduğunu, maddelerin teknik gereksinimlerini anladığını ve bu politikada belirtilen veri işleme faaliyetlerine <strong>kesin, açık ve gayrikabil-i rücu (geri alınamaz)</strong> bir şekilde muvafakat ettiğini beyan, kabul ve taahhüt eder.</p>
+        <h2 class="section-title title-red">2. 🔍 Politikanın Kapsamı ve Modüler Detaylar</h2>
+        <p>Raken Bot, çok fonksiyonlu bir Discord otomasyon aracıdır. Bu politikanın hükümleri, aşağıda listelenen alt modüllerin tamamında ve bu modüllerin alt kırılımlarında işlenen tüm veriler için istisnasız olarak geçerlidir:</p>
+        <ul>
+            <li><strong>A. Gelişmiş Moderasyon ve Ceza Sistemi:</strong> <code>/ban</code>, <code>/kick</code>, <code>/timeout</code>, <code>/warn</code>, <code>/unban</code> komutları; toplu üye denetimleri, sunucu içi susturma listeleri ve geçmiş ceza sicili kayıtları.</li>
+            <li><strong>B. Gelişmiş Loglama ve Denetim Kaydı:</strong> Sunucu içerisinde silinen mesajlar, düzenlenen mesajlar, sunucuya giren/çıkan kullanıcılar, rol alan/veren yetkililer, kanal oluşturma/silme aktiviteleri ve ses kanalı hareketleri.</li>
+            <li><strong>C. Gelişmiş Destek Sistemi (Ticket):</strong> Canlı destek odası talepleri, destek odası açılış-kapanış zaman damgaları, destek talebi oluşturan kullanıcı bilgileri ve yetkililerle yapılan yazışmaların transkript (metin) dökümleri.</li>
+            <li><strong>D. Global ve Sunucu İçi Ekonomi / Eğlence:</strong> Sanal para bakiyeleri, envanter sistemleri, günlük/haftalık ödül durumları, kumar/bahis simülasyon kayıtları ve sunucular arası küresel sıralama (leaderboard) verileri.</li>
+            <li><strong>E. Seviye ve Aktivite Sistemi:</strong> Kullanıcıların attığı mesaj sayısına göre hesaplanan tecrübe puanları (XP), kazanılan seviyeler, ses kanallarında kalma süreleri ve seviye ödülü olarak tanımlanan otomatik roller.</li>
+            <li><strong>F. Otomasyon ve Giriş Güvenliği (Anti-Raid / Captcha):</strong> Sunucuya giriş yapan hesapların profil yaşı analizi, Captcha (doğrulama kodu) doğruluk durumları, şüpheli hesap tespit algoritmaları ve otomatik rol (autorole) dağıtım motoru.</li>
+            <li><strong>G. Premium ve Abonelik Altyapısı:</strong> Bota maddi destek sağlayan sunucuların/kullanıcıların öncelikli işlem (hızlı kuyruk) hakları, premium lisans anahtarları, bitiş tarihleri ve bota özel tanımlanmış özel isim/profil yapılandırmaları.</li>
+        </ul>
+        <h2 class="section-title title-yellow">3. 📊 Toplanan ve İşlenen Verilerin Detaylı Kataloğu</h2>
+        <p>Bot, Discord Inc. altyapısının sağladığı yasal sınırlar ve Discord Developer Terms of Service (Geliştirici Hizmet Şartları) çerçevesinde, yalnızca işlevselliğini sürdürebilmesi için zorunlu olan verileri toplar. Toplanan veriler katı bir şekilde sınıflandırılmıştır:</p>
+        <h3>3.1 Teknik ve Benzersiz Tanımlayıcılar (Identifiers)</h3>
+        <ul>
+            <li><strong>Discord Kullanıcı ID (User ID):</strong> Sistemdeki her kullanıcının benzersiz 17-19 haneli sayısal numarası. (Kullanıcının gerçek kimliğiyle eşleştirilmez).</li>
+            <li><strong>Discord Sunucu ID (Guild ID):</strong> Botun ekli olduğu her sunucunun benzersiz sayısal kimliği.</li>
+            <li><strong>Kanal ve Rol ID'leri:</strong> Ayarların doğru çalışması için hedef gösterilen metin/ses kanallarının ve sunucu rollerinin sayısal numaraları.</li>
+            <li><strong>Mesaj ID'leri:</strong> Loglama, mesaj tepki rolleri (reaction role) ve mesaj silme/düzenleme kontrolleri için gerekli olan mesaj kimlik numaraları.</li>
+        </ul>
+        <h3>3.2 Kullanıcı Davranış ve İstatistik Verileri</h3>
+        <ul>
+            <li><strong>Komut Kullanım Geçmişi:</strong> Hangi kullanıcının, hangi sunucuda, saat kaçta, hangi komutu çalıştırdığına dair analitik zaman damgaları.</li>
+            <li><strong>Aktivite Metrikleri:</strong> Atılan toplam mesaj sayısı, ses kanallarında geçirilen toplam dakika gibi istatistiksel veriler.</li>
+            <li><strong>Destek Odası İçerikleri:</strong> Açılan Ticket'ların metinsel içerikleri, ekleri (görseller/dosyalar) ve talep geçmişi.</li>
+        </ul>
+        <h3>3.3 Sunucu Yönetim ve Yapılandırma Verileri</h3>
+        <ul>
+            <li>Botun sunucu içinde nasıl davranacağını belirleyen filtre ayarları (örn: küfür engelleyici açık/kapalı durumu, link engelleme beyaz listesi).</li>
+            <li>Giriş-çıkış mesaj şablonları, sunucuya özel ayarlanmış bota ait özel ön ekler (prefix) veya slash komut izin matrisleri.</li>
+        </ul>
+        <h2 class="section-title title-green">4. 🚫 Kesinlikle Toplanmayan ve Gizli Tutulan Veriler</h2>
+        
+        <div class="alert alert-warning">
+            <p><strong>UYARI:</strong> Raken Bot altyapısı, siber güvenlikte "Sıfır Güven" (Zero Trust) ve "Minimum Veri" (Data Minimization) ilkelerini benimser. Aşağıdaki veri kategorileri hiçbir şart ve koşulda bota ait sunuculara iletilemez, işlenemez ve saklanamaz:</p>
+        </div>
+        <ul>
+            <li><strong>Hassas Kişisel Veriler:</strong> Kullanıcıların gerçek hayattaki isimleri, soyisimleri, biyometrik verileri, din, dil, ırk, mezhep veya siyasi görüş bilgileri.</li>
+            <li><strong>Hesap Giriş Kimlikleri:</strong> Kullanıcıların Discord şifreleri, e-posta adresleri, iki aşamalı doğrulama (2FA) yedek kodları ve en önemlisi <strong>Discord Hesap Tokenları</strong>.</li>
+            <li><strong>Finansal ve Ödeme Bilgileri:</strong> Premium abonelik işlemlerinde kullanılan kredi kartı numaraları, son kullanma tarihleri, CVV/CVC kodları, banka hesap numaraları (IBAN). <em>Not: Tüm ödemeler resmi üçüncü taraf ödeme geçitleri (örn. Stripe, Papara, Shopier vb.) üzerinden, onların kendi güvenli altyapılarında gerçekleşir; bota finansal veri akışı olmaz.</em></li>
+            <li><strong>Özel Hayat ve DM Mesajları:</strong> Botun ekli olmadığı veya komut tetiklenmeyen gizli/özel mesajlaşma (DM) içerikleri ile botun loglama/moderasyon kapsamı dışında kalan genel sohbetlerin anlamsız metin gövdeleri.</li>
+            <li><strong>Cihaz ve Ağ Bilgileri:</strong> Kullanıcıların IP adresleri, MAC adresleri, coğrafi konum koordinatları, kullandıkları internet servis sağlayıcıları (ISS) veya cihaz donanım bilgileri.</li>
+        </ul>
+        <h2 class="section-title title-blue">5. ⚙️ Verilerin İşlenme Amaçları ve Hukuki Gerekçeler</h2>
+        <p>Toplanan veriler, rastgele veya keyfi amaçlarla değil, tamamen aşağıda belirtilen meşru menfaatler ve teknik zorunluluklar doğrultusunda işlenmektedir:</p>
+        <ol style="list-style-position: inside; margin-bottom: 20px;">
+            <li style="margin-bottom: 10px;"><strong>Hizmetin İfa Edilmesi ve Süreklilik:</strong> Botun sunucularda stabil çalışması, sunucu sahiplerinin yaptığı özelleştirilmiş ayarların (örn: hoş geldin mesajı içeriği) veri tabanında kaybolmadan saklanması.</li>
+            <li style="margin-bottom: 10px;"><strong>Siber Güvenlik ve Tehdit Engelleme:</strong> Kötü niyetli kullanıcıların bot altyapısına yönelik DDoS, SQL Enjeksiyonu, Spam veya API suistimali gibi siber saldırı girişimlerinin tespit edilmesi ve bu hesapların küresel kara listeye (global blacklist) alınması.</li>
+            <li style="margin-bottom: 10px;"><strong>Performans Optimizasyonu ve Hata Ayıklama:</strong> Bot kodunda meydana gelen mantıksal çökmelerin, yavaşlamaların veya istisnai hataların (exceptions) hangi komut ve veri girdisi esnasında oluştuğunun tespiti ve yazılımın iyileştirilmesi.</li>
+            <li style="margin-bottom: 10px;"><strong>Adil Rekabet ve Oyun Dengesi:</strong> Ekonomi ve seviye modüllerinde hile (dupe/exploit) yapılmasını engellemek, adil bir sunucu içi sıralama sistemi sunmak.</li>
+        </ol>
+        <h2 class="section-title title-yellow">6. 🤝 Veri Paylaşımı, Üçüncü Taraflar ve Uluslararası Veri Aktarımı</h2>
+        <ul>
+            <li><strong>Ticari Satış Yasağı:</strong> Raken Bot Yönetimi, topladığı kullanıcı verilerini hiçbir surette reklam ajanslarına, veri simsarlarına, pazarlama şirketlerine veya herhangi bir üçüncü şahsa <strong>satmayacağını, kiralamayacağını ve takas etmeyeceğini</strong> en kesin taahhütle garanti eder.</li>
+            <li><strong>Resmi Makamlar ve Hukuki Zorunluluklar:</strong> Veriler, yalnızca yürürlükte olan ulusal veya uluslararası yasal mevzuatlar (Siber Suçlarla Mücadele, Savcılık Talimatları, Mahkeme Kararları) çerçevesinde, resmi ve usulüne uygun bir celp kararı ibraz edilmesi durumunda yasal mercilere aktarılır.</li>
+            <li><strong>Altyapı Sağlayıcıları (Hosting):</strong> Verileriniz, dünya standartlarında siber korumaya sahip güvenli sanal sunucu (VDS/Dedicated) ve bulut veri tabanı (Cloud Database) altyapılarında barındırılır. Bu altyapı sağlayıcılarının verilere doğrudan erişim yetkisi bulunmamaktadır; veriler şifrelenmiş (encrypted) olarak saklanır.</li>
+        </ul>
+        <h2 class="section-title title-green">7. 🔒 İleri Düzey Veri Güvenliği ve Siber Savunma Protokolleri</h2>
+        <p>Verilerinizin güvenliğini sağlamak adına Bot altyapısında aşağıdaki teknik tedbirler aktif olarak uygulanmaktadır:</p>
+        <ul>
+            <li><strong>Erişim Yetki Matrisi:</strong> Veri tabanlarına ve botun yönetim paneline erişim, yalnızca en üst düzey iki (2) ana geliştirici ile sınırlandırılmıştır. Diğer alt kademe personelin veya destek ekibinin ham verilere erişimi tamamen engellenmiştir.</li>
+            <li><strong>Çift Faktörlü Koruma:</strong> Yönetici panelleri ve sunucu erişimleri, donanımsal veya yazılımsal İki Aşamalı Kimlik Doğrulama (2FA) ile korunmaktadır.</li>
+            <li><strong>Şifreleme Standartları:</strong> Hassas veri tabanı girdileri ve yapılandırma dosyaları, modern şifreleme algoritmaları kullanılarak saklanır. Veriler durağan haldeyken (at rest) ve aktarım halindeyken (in transit) şifrelidir.</li>
+            <li><strong>Yedekleme ve Felaket Kurtarma:</strong> Olası bir veri merkezinin çökmesi veya fiziksel hasar görmesi durumuna karşı, veri tabanları her 24 saatte bir şifreli bulut depolarına yedeklenir.</li>
+        </ul>
+        <h2 class="section-title title-red">8. ⏳ Veri Saklama Süreleri ve Kalıcı İmha (Silme) Prosedürü</h2>
+        <ul>
+            <li><strong>Aktif Kullanım Süresi:</strong> Verileriniz, botun işlevlerini yerine getirebilmesi için gerekli olan makul süre boyunca veri tabanlarında tutulur.</li>
+            <li><strong>Sunucudan Ayrılma Durumu:</strong> Bot bir sunucudan çıkarıldığında (kick/ban), o sunucuya ait tüm özel ayarlar, filtre yapılandırmaları ve log geçmişleri otomatik olarak "pasif" konuma alınır ve en geç 30 iş günü içerisindeki genel veri tabanı optimizasyon döngüsünde sistemden <strong>geri getirilemeyecek şekilde tamamen kazınır ve silinir</strong>.</li>
+            <li><strong>Kullanıcı Unutulma Talebi:</strong> Bir kullanıcı botun veri tabanından tamamen silinmek istediğinde, destek sunucusu üzerinden yapacağı başvuru ile ekonomi bakiyeleri, seviye puanları ve kullanıcı ID'sine bağlı tüm veriler 72 saat içinde kalıcı olarak imha edilir.</li>
+        </ul>
+        <h2 class="section-title title-blue">9. ⚖️ Küresel Veri Koruma Mevzuatlarına Uyum Beyanı</h2>
+        <p>Raken Bot, dünya genelindeki farklı hukuk sistemlerinin siber gizlilik standartlarını temel ilke olarak kabul eder:</p>
+        <h3>9.1 GDPR (Avrupa Birliği Genel Veri Koruma Yönetmeliği)</h3>
+        <p>Avrupa Birliği üye ülkelerinde ikamet eden kullanıcılar, GDPR kapsamında bota karşı şu haklara sahiptir: Verilerine erişim hakkı, verilerinin düzeltilmesini isteme hakkı, verilerinin silinmesini (Unutulma Hakkı) talep etme hakkı ve veri işlenmesini kısıtlama hakkı.</p>
+        <h3>9.2 KVKK (6698 Sayılı Kişisel Verilerin Korunması Kanunu)</h3>
+        <p>Türkiye Cumhuriyeti sınırları içerisindeki kullanıcılar için, 6698 sayılı kanunun 11. maddesinde belirtilen; kendisiyle ilgili kişisel veri işlenip işlenmediğini öğrenme, işlenme amacını bilme ve verilerin yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme hakları saklıdır ve bota uygulandığı ölçüde tam uyum gözetilir.</p>
+        <h3>9.3 CCPA (California Tüketici Gizliliği Yasası)</h3>
+        <p>Amerika Birleşik Devletleri / California eyaletindeki kullanıcılar için veri toplama süreçlerinde şeffaflık ilkesi bu metinle eksiksiz sağlanmıştır.</p>
+        <h2 class="section-title title-yellow">10. 👶 Çocukların Çevrimiçi Gizliliğinin Korunması</h2>
+        <p>Raken Bot, COPPA (Çocukların Çevrimiçi Gizliliğini Koruma Yasası) ve Discord küresel yaş sınırlandırma politikalarına sıkı sıkıya bağlıdır. Hizmetlerimiz, <strong>13 yaşın altındaki</strong> (veya yerel yasaların öngördüğü daha yüksek bir asgari yaş sınırının altındaki) çocukların tek başlarına kullanımına uygun değildir. 13 yaşından küçük bir çocuğun bota veri sağladığı fark edildiği an, yasal vasisinin talebi aranmaksızın ilgili tüm veriler sistemden derhal silinir ve hesap bot kullanımından uzaklaştırılır.</p>
+        <h2 class="section-title title-red">11. 📝 Politika Değişiklikleri, Bildirim ve Takip Yükümlülüğü</h2>
+        <p>Geliştirici Ekip, siber mevzuatlardaki güncellemeler, Discord API politikalarındaki köklü değişimler veya bota eklenecek devrimsel yeni modüller doğrultusunda, işbu Gizlilik Politikası metninde önceden herhangi bir ihtara gerek kalmaksızın <strong>kısmen veya tamamen değişiklik yapma hakkını saklı tutar</strong>.</p>
+        <p>Değişiklikler bu GitHub sayfasında veya botun resmi web sitesinde/destek sunucusunda yayınlandığı andan itibaren hukuken geçerlilik kazanır. Kullanıcıların ve sunucu yöneticilerinin belirli aralıklarla bu metni kontrol etmesi kendi sorumluluklarındadır. Politikadaki güncellemelerden sonra botu kullanmaya devam etmeniz, yeni maddeleri kayıtsız şartsız onayladığınız anlamına gelir.</p>
+        <h2 class="section-title title-green">12. ⚠️ Garanti Reddi Beyanı ve Hukuki Sorumluluk Sınırı (Disclaimer)</h2>
+        <p>Raken Bot, yazılımsal olarak ticari bir işletme garantisi olmaksızın, <strong>"olduğu gibi" (As Is)</strong> ve <strong>"mümkün ve kullanılabilir olduğu sürece" (As Available)</strong> esasıyla sunulan açık/yarı-açık kaynaklı bir projedir.</p>
+        <p>Geliştirici Ekip; Discord Inc. kaynaklı küresel altyapı çökmelerinden, veri merkezlerinde (datacenter) oluşabilecek yangın, deprem, siber savaş gibi mücbir sebeplerden, botun donanımsal kesintilerinden, geçici veri tabanı senkronizasyon kayıplarından veya sunucu yöneticilerinin bota yanlış yetki vermesi (örn: Yönetici yetkisi verilmesi sonucu sunucunun zarar görmesi) neticesinde doğabilecek maddi, manevi, doğrudan veya dolaylı hiçbir zarardan, kar kaybından ya da itibar kaybından hukuki, cezai ve mali olarak <strong>sorumlu tutulamaz</strong>. Tüm risk son kullanıcıya ve sunucu sahibine aittir.</p>
+        <h2 class="section-title title-blue" style="text-align: center; border-bottom: none; font-size: 30px; margin-top: 60px;">13. 📬 Uluslararası İletişim, Hak Talepleri ve Destek Ofisi</h2>
+        <p style="text-align: center; margin-bottom: 30px;">İşbu Gizlilik Politikası dokümanına dair her türlü yasal itirazınız, veri inceleme talepleriniz, KVKK/GDPR kapsamındaki silme (unutulma) başvurularınız veya telif hakkı ihlali bildirimleriniz için resmi kanallarımız aşağıda belirtilmiştir:</p>
+        <div class="alert alert-info" style="text-align: center;">
+            <p><strong>Resmi Discord Destek Merkezi:</strong> [Raken Bot Destek Sunucusu Davet Linki veya Geliştirici Discord ID'leri]</p>
+            <p><strong>Çalışma Saatleri:</strong> Hafta içi 09:00 - 18:00 (GMT+3)</p>
+            <p><strong>Yanıt Süresi:</strong> Yapılan resmi başvurular, teknik ve hukuki incelemelerin ardından en geç yedi (7) iş günü içerisinde nihai karara bağlanarak tarafınıza geri bildirim yapılacaktır.</p>
+        </div>
+        <div class="footer">
+            © 2026 Raken Bot Yazılım Geliştirme Grubu. Tüm hakları saklıdır. Bu projenin Discord Inc., Discord LLC veya bağlı iştirakleri ile hiçbir resmi, organik veya ticari bağı bulunmamaktadır. Discord markası ve logosu Discord Inc. tescilli ticari markalarıdır.
+        </div>
+    </div>
+</body>
+</html>
